@@ -1,0 +1,55 @@
+<div class="container pb-0">
+	<div class="row justify-content-center" id="books">
+		<div class="col-md-10 text-center">
+			<h2 class="fw700 size2 mt-0 pt-5 pb-4">Must-have Succulent Products!</h2>
+			<p class="f1 text-center size1-2">If you want to know the key aspects about growing your succulents, I would recommend you to check out these 4 products. They are the bread and butter of growing a succulent. If you want to read more about these and other products check out my <a href="{{site.baseurl}}/recommended-products">books & products section</a>!</p>
+		</div>
+	</div>	
+</div>
+
+<div class="container-fluid mt-0 pb-3">
+	<div class="row">
+		<div class="glide recommended">
+			<div class="glide__track" data-glide-el="track">
+				<ul class="glide__slides">
+					<li class="glide__slide px-md-4 mt-md-4">
+						{% include most-recommended-products-detail.html amazon-link="https://www.amazon.com/Beginners-Guide-Succulent-Gardening-Step/dp/0804851190" image="book.jpg" title="Best Book Overall" product="A Beginner's Guide to Succulents" seal="badge-book.svg" %}
+					</li>
+					<li class="glide__slide px-md-4 mt-md-4">
+						{% include most-recommended-products-detail.html amazon-link="https://www.amazon.com/Succulent-ZOUTOG-Ceramic-Planter-Included/dp/B07DWS4X3Y" image="pot.jpg" title="Best Amazon Pot" product="6 White Mini 3.15 inch Ceramic Pots" seal="badge-pots.svg" %}
+					</li>
+					<li class="glide__slide px-md-4 mt-md-4">
+						{% include most-recommended-products-detail.html amazon-link="https://www.amazon.com/Organic-Succulent-Cactus-Draining-Pre-Mixed/dp/B07JMLDYRB" image="soil.jpg" title="Best Soil Overall" product="Professional Grower Mix Soil Blend" seal="badge-soil.svg" %}
+					</li>
+					<li class="glide__slide px-md-4 mt-md-4">
+						{% include most-recommended-products-detail.html amazon-link="https://www.amazon.com/EZORKAS-Dimmable-Spectrum-Adjustable-Gooseneck/dp/B07ZHY1B4C" image="light.jpg" title="Best Succulent Light" product="Light with 3 Modes for Indoor Plants" seal="badge-light.svg" %}
+					</li>
+				</ul>
+			</div>
+			<div class="glide__arrows" data-glide-el="controls">
+				<button class="glide__arrow glide__arrow--prev fw700 ml-2" data-glide-dir="<"><</button>
+				<button class="glide__arrow glide__arrow--next fw700 mr-2" data-glide-dir=">">></button> 
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.0.2/glide.js"></script>
+<script>
+	var viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+	if (viewportWidth > 640) {
+		var number = 5
+		var start = 2
+	} else {
+		var number = 2
+		var start = 1
+	}
+	var glideMulti = new Glide('.recommended', {
+		type: 'slider',
+		autoplay: false,
+		startAt: start,
+		focusAt: 'center',
+		perView: number
+	});
+	glideMulti.mount();
+</script>

@@ -1,0 +1,36 @@
+---
+
+---
+<!DOCTYPE html>
+<html lang="en-US">
+
+	{% include head.html %}
+	<!-- GLIDEJS -->
+	<!-- Required Core Stylesheet -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.0.2/css/glide.core.css">
+	<!-- Optional Theme Stylesheet -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.0.2/css/glide.theme.css">
+	<!-- Estilos personalizados -->
+	<style>
+		.glide__arrow--next {
+			right:0;
+		}
+		.glide__arrow{
+			background-color: #899C41!important;
+		}
+	</style>
+
+	<body>
+		<div id="overlaydiv"></div>
+		{% include nav.html %}
+
+		<!-- Ezoic - top_of_page - top_of_page -->
+		<div id="ezoic-pub-ad-placeholder-105"> </div>
+		<!-- End Ezoic - top_of_page - top_of_page -->
+		
+			{{content}}
+		{% include footer.html %}
+	</body>
+
+	{% include scripts.html %}
+</html>

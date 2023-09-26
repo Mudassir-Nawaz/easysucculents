@@ -1,0 +1,314 @@
+---
+layout: page
+title: Sitemap
+permalink: /sitemap
+description: Easy Succulents Sitemap
+---
+<!-- Datos Generales: -->
+{% assign allPostsCount=  site.posts | size%}
+{% assign allPagesCount=  site.pages | size%}
+{% assign ultimateguideCount=  site.categories['ultimateguide'] | size%}
+{% assign questionCount=  site.categories['question'] | size%}
+{% assign pinableCount=  site.categories['pinable'] | size%}
+{% assign productCount=  site.categories['productreview'] | size%}
+{% assign tutorialsCount=  site.categories['Tutorials'] | size%}
+{% assign numberMonths = site.posts | group_by_exp:"post", "post.date | date: '%Y %b'" | size %}
+<!-- Datos por fechas: -->
+
+<div class="container">
+	<div class="row pt-4">
+		<div class="col-12 text-center">
+			<h1>Sitemap</h1>
+			<!-- <h4 class="pb-2">Total: {{ultimateguide_count | plus:question_count | plus: pinable_count }} (main) + {{product_count | plus: professionals_count}} (other)</h4> -->
+		</div>
+	</div>
+	<div class="row pt-5">
+		<div class="col-md-12 text-center" id="buttonsDiv">
+			<a class="btn btn-lg btn-filter active" id="btn-1" onclick="showContent(1)">All Content Summary</a>
+			<a class="btn btn-lg btn-filter" id="btn-2" onclick="showContent(2)">Pages Table</a>
+			<a class="btn btn-lg btn-filter" id="btn-3" onclick="showContent(3)">Posts by Date</a>
+			<a class="btn btn-lg btn-filter" id="btn-4" onclick="showContent(4)">Posts by Category</a>
+		</div>
+	</div>
+	<!-- BEGIN: ALL CONTENT SUMMARY -->
+	<div id="1" class="row-filter">
+	<div class="row">
+		<div class="col-md-12">
+			<h3 class="category_name axiforma allcaps pt-5 pb-2">All Content</h3>
+		</div>
+	</div>
+	<div class="row justify-content-start">
+		<div class="col-md-2 text-center">
+			<h3 class="axiforma pt-3">{{allPostsCount}}</h3>
+			<h4 class="pb-2">All Posts</h4>
+		</div>
+		<div class="col-md-2 text-center">
+			<h3 class="axiforma pt-3">{{ allPagesCount }}</h3>
+			<h4 class="pb-2">All Pages</h4>
+		</div>
+		<div class="col-md-2 text-center">
+			<h3 class="axiforma pt-3">{{ numberMonths }}</h3>
+			<h4 class="pb-2">Months Old</h4>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<h3 class="category_name axiforma allcaps pt-5 pb-2">Categories</h3>
+		</div>
+	</div>
+	<div class="row justify-content-center">
+		<div class="col text-center">
+			<h3 class="axiforma pt-3">{{ ultimateguideCount }}</h3>
+			<h4 class="pb-2">Ultimate Guides</h4>
+		</div>
+		<div class="col text-center">
+			<h3 class="axiforma pt-3">{{ questionCount }}</h3>
+			<h4 class="pb-2">Question Posts</h4>
+		</div>
+		<div class="col text-center">
+			<h3 class="axiforma pt-3">{{ pinableCount }}</h3>
+			<h4 class="pb-2">Pinable Posts</h4>
+		</div>
+		<div class="col text-center">
+			<h3 class="axiforma pt-3">{{ productCount }}</h3>
+			<h4 class="pb-2">Product Reviews</h4>
+		</div>
+		<div class="col text-center">
+			<h3 class="axiforma pt-3">{{ tutorialsCount }}</h3>
+			<h4 class="pb-2">Tutorials</h4>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<h3 class="category_name axiforma allcaps pt-5 pb-2">Post by Date</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">Month</th>
+						<th scope="col">U.Guide</th>
+						<th scope="col">Pinable</th>
+						<th scope="col">Question</th>
+						<th scope="col">Product</th>
+						<th scope="col">Tutorial</th>
+						<th scope="col">Total</th>
+						<th scope="col">Total SUM</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- Lo basé en este link: -->
+					<!-- https://gist.github.com/tuananh/7432553 -->
+					<!-- 1. Saco los posts por cada mes -->
+					{% assign postsByYearMonth = site.posts | group_by_exp:"post", "post.date | date: '%Y %b'" %}
+					<!-- 2. Hago un loop, y añado una fila por mes. Le asigno las distintas categorías y todos -->
+					{% for yearMonth in postsByYearMonth %}
+						{% assign ultimateguides =  yearMonth.items | where: "category", "ultimateguide" | size %}
+						{% assign pinable =  yearMonth.items | where: "category", "pinable" | size %}
+						{% assign question =  yearMonth.items | where: "category", "question" | size %}
+						{% assign productreview =  yearMonth.items | where: "category", "productreview" | size %}
+						{% assign tutorials =  yearMonth.items | where: "category", "Tutorials" | size %}
+						{% assign allmonth =  yearMonth.items | size %}
+						<!-- 3. Para definir los sumatorios.-->
+						<!-- Condicional para ver si es el último mes (primer loop). Si es el primer loop, asigno a mainSumatorio todos los posts menos los profesionales y a allSumatorio todos los posts directamente. -->
+						<!-- Una vez pasado el loop, asigno a dos variables (lastMain y last Professionals) los main y profesionals de ese mes. Para usarlo más tarde. -->
+						<!-- Cuando ya no es el primer loop, resto al mainSumatorio y allSumatorio (que han quedado asignados del último loop) el lastMain y lastProfessionals que asignamos antes.-->
+						<!-- Parece complicado (y algo lo es), pero tiene bastante lógica si se lee el código. -->
+						{% if forloop.first %}
+							{% assign mainSumatorio = allPostsCount | minus: tutorialsCount %}
+							{% assign allSumatorio = allPostsCount %}
+						{% else %}
+							{% assign mainSumatorio = mainSumatorio | minus: lastMain %}
+							{% assign allSumatorio = allSumatorio | minus: lastMain | minus: lastProfessionals %}
+						{% endif %}
+						{% assign lastMain = main %}
+						{% assign lastProfessionals = professionals %}
+
+						<tr>
+							<th style="width:10%" scope="row">{{ yearMonth.name }}</th>
+							<td style="width:10%">{{ultimateguides}}</td>
+							<td style="width:10%">{{pinable}}</td>
+							<td style="width:10%">{{question}}</td>
+							<td style="width:10%">{{productreview}}</td>
+							<td style="width:10%">{{tutorials}}</td>
+							<td style="width:10%"><b>{{allmonth}}</b></td>
+							<td style="width:10%"><b>{{allSumatorio}}</b></td>
+						</tr>
+					
+					{% endfor %}
+			</table>
+		</div>
+	</div>
+	</div>
+	<!-- END: ALL CONTENT SUMMARY -->
+	<!-- BEGIN: ALL PAGES TABLE -->
+	<div id="2" class="row-filter d-none">
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-hover" id="{{category_name}}">
+				<h3 class="category_name axiforma allcaps pt-5 pb-2">All Pages</h3>
+				<thead>
+					<tr>
+						<th>Author</th>
+						<th>Shop</th>
+						<th>Page Title</th>
+						<th>Slug</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for page in site.pages %}
+					{% include determine-author.html %}
+					<tr>
+						<td>{{author.name}}</td>
+						<td>{{page.shop}}</td>
+						<td>
+							{% if page.title %}
+							<a href="{{page.url}}">{{page.title}}</a>
+							{% else%}
+							<a href="{{page.url}}">Go to Page </a>
+							{% endif %}
+						</td>
+						<td>{{page.url}}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	</div>
+	<!-- END: ALL PAGES TABLE -->
+	<!-- BEGIN: POSTS BY DATE -->
+	<div id="3" class="row-filter d-none">
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-hover" id="{{category_name}}">
+				<h3 class="category_name axiforma allcaps pt-5 pb-2">All Posts</h3>
+				<thead>
+					<tr>
+						<th>Category</th>
+						<th>Author</th>
+						<th>Shop</th>
+						<th>Post Title</th>
+						<th>Slug</th>
+						<th>Date</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for page in site.posts %}
+					{% include determine-author.html %}
+					<tr>
+						<td>{{page.category}}</td>
+						<td>{{author.name}}</td>
+						<td>{{page.shop}}</td>
+						<td><a href="{{page.url}}">{{page.title}}</a></td>
+						<td>{{page.slug}}</td>
+						<td>{{page.date | date: '%B %d, %Y' }}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	</div>
+	<!-- END: POSTS BY DATE -->
+	<!-- BEGIN: POSTS BY CATEGORY -->
+	<div class="row-filter d-none" id="4">
+	<div class="row pt-5">
+		<div class="col-md-12">
+			<div id="accordion">
+				<h3 class="category_name axiforma allcaps pt-3 pb-4">Categories:</h3>
+				{% for category in site.categories %}
+				{% capture category_name %}{{ category | first }}{% endcapture %}
+				<div class="card mt-3">
+					<div class="card-header" id="heading{{ forloop.index }}" data-toggle="collapse" data-target="#collapse{{ forloop.index }}" aria-expanded="false" aria-controls="collapse{{ forloop.index }}" style="cursor:pointer">
+						<h5 class="mb-0">
+						<button class="btn btn-link">
+							<span class="allcaps size1-2 black fw500">{{ category_name }}</span>
+						</button>
+						</h5>
+					</div>
+
+					<div id="collapse{{ forloop.index }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+						<div class="card-body">
+							<table class="table table-hover" id="{{category_name}}">
+								<thead>
+									<tr>
+									<th>Author</th>
+									<th>Post Title</th>
+									<th>Date</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for page in site.categories[category_name] %}
+									{% include determine-author.html %}
+									<tr>
+										<td>{{author.name}}</td>
+										<td><a href="{{page.url}}">{{page.title}}</a></td>
+										<td>{{page.date | date: '%B %d, %Y' }}</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	</div>
+	<!-- END: POSTS BY CATEGORY -->
+</div>
+
+<script>
+function showContent(key){
+	// Pongo todos los botones (class: btn-filter) sin active, y todos los rows (class:row-finter) ocultos.
+	var numero = key
+	var buttons = document.getElementsByClassName("btn-filter")
+	for (var i = buttons.length - 1; i >= 0; i--) {
+		buttons[i].classList.remove("active")
+	}
+	var rows = document.getElementsByClassName("row-filter")
+	for (var i = rows.length - 1; i >= 0; i--) {
+		rows[i].classList.add("d-none")
+	}
+	// Activo el botón en cuestión, y hago visible su fila.
+	var elbutton = document.getElementById("btn-" + key)
+	elbutton.classList.add("active")
+	var larow = document.getElementById(key)
+	larow.classList.remove("d-none")
+
+}
+</script>
+
+<style>
+.btn-filter{
+	border: 1px solid #424242;
+	color: #424242;
+	background-color: white;
+	cursor: pointer;
+}
+.btn-filter.active{
+	background-color: #E3DBC8;
+}
+textarea:hover, 
+input:hover, 
+textarea:active, 
+input:active, 
+textarea:focus, 
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn-filter:active,
+.btn-filter.active
+{
+    outline:none !important;
+    -webkit-appearance:none;
+    box-shadow: none !important;
+}
+a:focus {outline:none;}
+</style>

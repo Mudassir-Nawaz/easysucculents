@@ -1,0 +1,21 @@
+# Redirect traffic from Spain to /not-allowed
+[[redirects]]
+  from = "/"
+  to = "/not-allowed"
+  status = 302
+  force = true
+  conditions = {Country = ["ES"]}
+
+# Redirect root domain to https
+[[redirects]]
+  from = "http://easysucculents.com"
+  to = "https://www.easysucculents.com"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/not-allowed"
+  status = 302
+  force = true
+  conditions = {Country = ["ES"]}

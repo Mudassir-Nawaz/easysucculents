@@ -1,0 +1,35 @@
+---
+layout: page
+permalink: /thank-you
+title: Thank you!
+description: Thank you for contacting Easy Succulents. I'll get back to you as soon as possible!
+image: /assets/img/pages/thank-you.jpg
+---
+<div class="container-fluid" id="thankyoubanner">
+	<div class="row justify-content-center">
+		<div class="col-12 col-md-8 mt-3 text-center">
+			<h1 class="allcaps black fw700 size3-2 mt-5">Success!</h1>
+		</div>
+	</div>
+	<div class="row justify-content-center">
+		<div class="col-12 col-md-8 py-5 text-center">
+			<h2 class="black fw500 lh1-5 mb-1 size1-4">Thank you for contacting Easy Succulents. I'll get back to you ASAP!</h2>
+			<h2 class="black fw500 lh1-5 mb-1 size1-4">In the meantime, you might like one of our latest posts:</h2>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row justify-content-center mt-4">
+		{% assign alldocs = site.posts | sort: 'date' | reverse %}
+		{% for doc in alldocs limit:9 %}
+			{% include post-column-list.html post=doc %}
+		{% endfor %}
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<a href="{{site.baseurl}}/blog"><button class="btn btn-resources mt-3 size1-5 px-5">Load More</button></a>
+		</div>
+	</div>
+</div>

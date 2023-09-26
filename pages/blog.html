@@ -1,0 +1,172 @@
+---
+layout: page
+permalink: /blog
+title: Easy Succulents Blog
+description: Our most recent Succulent Tips, Succulent Secrets, Succulent pictures! If you want to know everything we write about, this is the place to look!
+image: /assets/img/pages/blog.jpg
+---
+<!-- Sacamos los TAGS -->
+{% comment %}
+=======================
+The following part extracts all the tags from your documents and sort tags, so that you do not need to manually collect your tags to a place.
+=======================
+{% endcomment %}
+{% assign rawtags = "" %}
+{% for post in site.documents %}
+	{% assign ttags = post.tags | join:'|' | append:'|' %}
+	{% assign rawtags = rawtags | append:ttags %}
+{% endfor %}
+{% assign rawtags = rawtags | split:'|' | sort %}
+
+{% comment %}
+=======================
+The following part removes dulpicated tags and invalid tags like blank tag.
+=======================
+{% endcomment %}
+{% assign tags = "" %}
+{% for tag in rawtags %}
+	{% if tag != "" %}
+		{% if tags == "" %}
+			{% assign tags = tag | split:'|' %}
+		{% endif %}
+		{% unless tags contains tag %}
+			{% assign tags = tags | join:'|' | append:'|' | append:tag | split:'|' %}
+		{% endunless %}
+	{% endif %}
+{% endfor %}
+
+{% comment %}
+=======================
+The purpose of this snippet is to list all your posts posted with a certain tag.
+=======================
+{% endcomment %}
+
+<div class="container-fluid" id="blogbanner" style="-webkit-box-shadow:inset 0px -20px 0px 0px #fff; -moz-box-shadow:inset 0px -20px 0px 0px #fff;  box-shadow:inset 0px -20px 0px 0px #fff;">
+	<div class="row justify-content-start">
+		<div class="col-md-7 offset-md-1">
+			<div class="row mt-0 mt-md-5">
+				<div class="col-md-9 px-5 py-4 mt-0 mt-md-5" style="background-color: white; border-left: 15px solid #FCDADA">
+					<h1 class="lh1-5 size1-9 fw600"><i><span class="size1-4 fw500">This is</span></i><br>Our Blog</h1>
+					<p class="axiforma fw400 lh1-7 size1-1 pt-2 mb-0">Everything we publish is on this page. Look around or use our search engine to find the post you were looking for.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container mt-4 pt-3">
+	<div class="row justify-content-center mt-md-2">
+		<div class="col-md-12" id="postsColumn">
+			<div class="row justify-content-between mt-0">
+				<div class="col-12 col-md-8 text-left">
+					<h2 class="f2 my-0 text-left pr-5"><span class="size1-7">Search our blog:</span></h2>
+				</div>
+				<div class="d-none d-md-block col-md-4 text-left align-self-center">
+					<div class="text-right">
+						<button class="btn-resources showHideFilterButton" onclick="changeClasses()">Show Filters</button>
+						<button class="btn-resources showHideFilterButton d-none" onclick="changeClasses()">Hide Filters</button>
+					</div>
+				</div>
+			</div>
+			<div class="row justify-content-center mt-3">
+				<div class="col-12 col-md-12 text-left align-self-center">
+					<input type="text" class="px-4 input-black w-100" placeholder="Search by Post Title" id="filterInput" oninput="searchPosts()">
+				</div>
+			</div>
+			<div class="row d-none d-md-block">
+				<div class="col-md-12 text-left pt-4">
+					<div id="results-showing">Showing: {{site.posts.size}} posts</div>
+				</div>
+			</div>
+			<div class="row justify-content-center justify-content-md-start mt-5">
+				{% assign latest = site.posts  | sort: 'date' | reverse%}
+				{% for post in latest %}
+					{% include post-column-list.html post=post columns=4 %}
+				{% endfor %}
+			</div>
+		</div>
+		<div class="col-md-3 d-none" id="filterColumn">
+			<div class="row justify-content-center mt-3">
+				<div class="col-12 col-md-12 text-left align-self-center">
+					<h2 class="f2 my-0 text-left pr-5"><span class="size1-7">By Category:</span></h2>
+				</div>
+			</div>
+			<div class="row justify-content-center mt-3">
+				<div class="col-12 col-md-12 text-left align-self-center">
+					{% for category in site.categories %}
+						{% capture category_name %}{{ category | first }}{% endcapture %}
+					    <button class="f1 pointer px-2 py-2 my-2 tag-button-tagpage2" onclick="hasBeenClicked('{{ category_name | slugify }}', 'cat')" id="cat_{{category_name | slugify }}">{{category_name}} </button>
+					{% endfor %}
+				</div>
+			</div>
+			<div class="row justify-content-center mt-4">
+				<div class="col-12 col-md-12 text-left align-self-center">
+					<h2 class="f2 my-0 text-left pr-5"><span class="size1-7">By Tag:</span></h2>
+				</div>
+			</div>
+			<div class="row justify-content-center mt-3">
+				<div class="col-12 col-md-12 text-left align-self-center">
+					{% for tag in tags %}
+						<button class="f1 pointer px-2 py-2 my-2 tag-button-tagpage2" onclick="hasBeenClicked('{{ tag | slugify }}', 'tag')" id="tag_{{tag | slugify }}">{{ tag }} </button>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+
+<!-- Esta función está para ver si hay un término de búsqueda en los url parameters -->
+<script>
+
+//Esta función se ejecuta para ver si hay un parámetro de búsqueda 
+function checkUrlParams(){
+	// Primero saco el keyword, el parámetro de búsqueda (si lo hay)
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	var keyword = urlParams.get("search")
+	// Si existe, lo añado en el input y además filtro los posts de acuerdo con esa keyword.
+	if(keyword != null){
+		document.getElementById("filterInput").value = keyword;
+		filterPosts(keyword);
+	}
+}
+// Esta función se ejecuta si hay un parámetro de búsqueda
+function filterPosts(keyword){
+	// Primer añado un d-none a todos los posts. Todos se ocultan.
+	// (Esto lo hago con js y no jquery porque aún no se ha cargado el script the jquery. Por eso es ligeramente distinto en la funcion de search posts del custom.js)
+	var todos = document.getElementsByClassName("postCol");
+	for(var i = 0; i < todos.length; i++)
+	{
+		todos[i].classList.add('d-none');
+	}
+	// Pongo el keyword (que es lo que se ha puesto literalmente en el search) en minúsculas:
+	var lowkeyword = keyword.toLowerCase();
+	// Saco un array con todos los posts (tienen cityCol como clase). 
+	var posts = document.getElementsByClassName("postCol");
+	// Hago un loop por todos esos posts.
+	var results = 0;
+	for(var i = 0; i < posts.length; i++){
+		// Para cada post saco el id (que realmente es el título del post) y lo pongo en minúsculas.
+		var postid = posts[i].id
+		var postidLowerCase = postid.toLowerCase();
+		// Si, el texto introducido en el input (el keyword, pero ya transformado a minúsculas), está contenido en el id (que es el título), elimino el d-none y vuelve a aparecer.
+		if(postidLowerCase.includes(lowkeyword)){
+			document.getElementById(posts[i].id).classList.remove("d-none");
+			results += 1
+		}
+	}
+	// Cuento el result (no me dejaba llamar a la función de custom.js - pero el código es idéntico a este.)
+	if(results == 1 ){
+		var singularORplular = " post"
+	} else {
+		var singularORplular = " posts"
+	}
+	document.getElementById("results-showing").innerHTML = "Showing: " + results + singularORplular;
+}
+
+// Ejecuto la función para ver si hay un search parameter
+checkUrlParams();
+
+</script>

@@ -1,0 +1,27 @@
+
+<div style="height: 5px; background-color: #D2DCAB;"></div>
+
+<div class="container pb-5">
+	<div class="row justify-content-center">
+		<div class="col-md-10 text-center">
+			<h2 class="fw700 size2 mt-0 pt-5 pb-4">My Latest Posts</h2>
+			<p class="f1 text-center size1-2">These are the lastest posts I've published. But if you want to check out everything in this page, please visit my <a href="{{site.baseurl}}/blog">blog page</a>. And remember that you can use the filters to find what you're looking for!</p>
+		</div>
+	</div>
+</div>
+<div class="container pb-5">
+	<div class="row justify-content-center">
+		{% assign latest = site.posts  | sort: 'date' | reverse%}
+		{% for post in latest limit:8 offset:0 %}
+			{% include post-column-list.html post=post columns=4 %}
+		{% endfor %}
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<a href="{{site.baseurl}}/blog"><button class="btn btn-resources mt-3 size1-5 px-5">Load More</button></a>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,76 @@
+<nav class="navbar navbar-expand-md navbar-light sticky-top py-2 shadowBottom" id="main-navbar" >
+	<a class="navbar-brand" href="{{site.baseurl}}/">
+		<img class="img-fluid ml-md-3 pl-0 mr-md-3 pr-2 pl-2 nav-logo" src="{{site.baseurl}}/assets/img/logos/sitelogotext.svg" alt="Easy Succulents Logo">
+	</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation" id="navbarButtonXs" style="border-color: white!important;">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarMain">
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item">
+				<a class="nav-link allcaps size1-05 px-3 mt-2 fw500 ls0-01 axiforma" href="{{site.baseurl}}/">Start Here</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link allcaps size1-05 px-3 mt-2 fw500 ls0-01 axiforma pl-md-4" href="{{site.baseurl}}/about-me">About</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link allcaps size1-05 px-3 mt-2 fw500 ls0-01 axiforma" href="{{site.baseurl}}/blog">Blog</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link allcaps size1-05 px-3 mt-2 fw500 ls0-01 axiforma" href="{{site.baseurl}}/recommended-products">Books & Products</a>
+			</li>
+		</ul>
+		<div class="form-inline my-2 my-md-0" id="searchForm">
+			<div class="pt-1 pb-2 px-2 d-none" id="searchInputDiv">
+				<input type="text" class="search py-2 pl-2 ml-3" id="searchInput">
+			</div>
+
+			<div>
+			<img src="{{site.baseurl}}/assets/img/icons/lupa.svg" alt="" class="img-fluid pointer menu-toggle px-0 d-none d-md-block" style="width: 45px;" id="search_submit" {% if jekyll.environment == "production" %} onclick="searchPostsNavProduction(document.getElementById('searchInput').value)" {% else %} onclick="searchPostsNavLocalhost(document.getElementById('searchInput').value)" {% endif %}>
+			
+		</div>
+	</div>
+</nav>
+
+<script>
+// Buscador con Enter
+var input = document.getElementById("searchInput");
+input.addEventListener("keyup", function(event) {
+	if (event.keyCode === 13) {
+		console.log("bingo!")
+		event.preventDefault();
+		document.getElementById("search_submit").click();
+	}
+});
+</script>
+
+<style>
+#main-navbar{
+	background-color: white;
+}
+#searchInput {
+	border-bottom: 2px solid #899D41;
+	border-top: 0px;
+	border-left: 0px;
+	border-radius: 4px;
+	border-right: 0px;
+	background-color: rgba(255,255,255,0)
+}
+#searchInputDiv{
+	background-color: white; 
+	border-radius: 30px;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+.backgroundWhite{
+	background-color: white; 
+	border-radius: 30px;
+}
+.nav-link{
+	color: #424242!important;
+}
+.nav-link:hover{
+	color: #899D41!important;
+}
+</style>

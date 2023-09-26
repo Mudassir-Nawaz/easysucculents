@@ -1,0 +1,37 @@
+<div style="background-color: #E8E7EC;">
+<div class="container-fluid">
+	<div class="row justify-content-between footer-second-div FOOTER-maincolor2" >
+		<div class="col-md-2 col-8 py-4 text-left">
+			<a href="{{site.baseurl}}/">
+				<img class="img-fluid" src="{{site.baseurl}}/assets/img/logos/sitelogotext.svg" alt="Easy Succulents Logo">
+			</a>
+		</div>
+		<div class="col-md-8 col-sm-12 text-right align-self-center">
+			<nav class="navbar p-1 navbar-expand-md navbar-light" id="navigationFooter">
+				<div class="collapse navbar-collapse justify-content-center" id="navbarFooter">
+					<ul class="navbar-nav nav-fill w-100">
+						<li class="nav-item">
+							<a class="nav-link fw500 size1" href="{{site.baseurl}}/about-me">About</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link fw500 size1 " href="{{site.baseurl}}/privacy-policy">Privacy Policy</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link fw500 size1 " href="{{site.baseurl}}/terms-of-service">Terms of Service</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link fw500 size1 " href="{{site.baseurl}}/sitemap">Sitemap</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link fw500 size1 {% if page.url contains 'contact' %} active {% endif %}" href="{{site.baseurl}}/contact">Contact</a>
+						</li>
+						<li class="nav-item allcaps">
+							<a class="nav-link fw500 size1 disabled" href="{{site.baseurl}}/about-me">© Easy Succulents {{ 'now' | date: "%Y" }}</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</div>
+</div>
+</div>

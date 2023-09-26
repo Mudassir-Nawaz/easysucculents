@@ -1,0 +1,43 @@
+<!-- <div class="container">
+	<div class="row mb-5 justify-content-center">
+		<div class="col-md-6 text-center">
+			<p class="f1 text-center"><a target="_blank" href="{{include.link}}">{{include.description}}</a></p>
+			<a target="_blank" href="{{include.link}}&tag={{site.amazon.tag}}">
+				<img src="{{site.baseurl}}/assets/img/posts/{{page.slug}}/{{include.image}}" alt="{{include.description}}" class="img-fluid pb-4 px-5 px-md-0">
+			</a>
+			<a target="_blank" href="{{include.link}}&tag={{site.amazon.tag}}"><button class="btn btn-resources fw600 mt-3 px-3">Check Price</button></a>
+		</div>
+	</div>
+</div> -->
+
+{% if include.type == "pages" %}
+	{% assign type = "pages" %}
+{% else %}
+	{% assign type = "posts" %}
+{% endif %}
+
+<div class="row justify-content-center pb-3 pb-md-5 mt-5 mt-md-0">
+	<div class="col-md-4 px-md-0 px-5">
+		<a href="{{include.link}}?tag={{site.amazon.tag}}" target="_blank">
+			{% responsive_image_block %}
+				template: _includes/responsive-image.html
+				path: assets/img/{{type}}/{{page.url}}/{{include.image}}
+				alt: {{include.title}}
+			{% endresponsive_image_block %}
+		</a>
+	</div>
+	<div class="col-md-8 px-md-5 text-center text-md-left" style="border-top: lightgrey 1px solid;">
+		<h3 class="lh1-3 py-3 text-center text-md-left">
+			<a href="{{include.link}}?tag={{site.amazon.tag}}" class="heading" target="_blank">
+				{{include.title}}
+			</a>
+		</h3>
+		<p class="lh1-7 size1-1 pt-1 fw500 mb-0 text-center text-md-left">
+			{{include.description}}
+		</p>
+		<p class="lh1-7 size1-1 pt-4 fw500 mb-0 text-center text-md-left">
+			<a target="_blank" href="{{include.link}}"><img src="{{site.baseurl}}/assets/img/icons/amazonprime.png" alt="Amazon Prime Logo" class="img-fluid" style="width:180px;"></a>
+		</p>
+		<a target="_blank" href="{{include.link}}?tag={{site.amazon.tag}}"><button class="btn btn-resources fw600 mt-3 px-3" style="background-color: #FFA637; color:black; letter-spacing: 0.02rem;">Check Price on Amazon</button></a>
+	</div>
+</div>

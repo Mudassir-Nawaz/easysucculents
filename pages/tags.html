@@ -1,0 +1,106 @@
+---
+layout: page
+title: Tags
+permalink: /tags
+description: Easy Succulents Tag Page
+image: /assets/img/pages/tags.jpg
+---
+
+<!-- Lo he cogido de aquí: https://codinfox.github.io/dev/2015/03/06/use-tags-and-categories-in-your-jekyll-based-github-pages/ -->
+
+{% comment %}
+=======================
+The following part extracts all the tags from your documents and sort tags, so that you do not need to manually collect your tags to a place.
+=======================
+{% endcomment %}
+{% assign rawtags = "" %}
+{% for post in site.documents %}
+	{% assign ttags = post.tags | join:'|' | append:'|' %}
+	{% assign rawtags = rawtags | append:ttags %}
+{% endfor %}
+{% assign rawtags = rawtags | split:'|' | sort %}
+
+{% comment %}
+=======================
+The following part removes dulpicated tags and invalid tags like blank tag.
+=======================
+{% endcomment %}
+{% assign tags = "" %}
+{% for tag in rawtags %}
+	{% if tag != "" %}
+		{% if tags == "" %}
+			{% assign tags = tag | split:'|' %}
+		{% endif %}
+		{% unless tags contains tag %}
+			{% assign tags = tags | join:'|' | append:'|' | append:tag | split:'|' %}
+		{% endunless %}
+	{% endif %}
+{% endfor %}
+
+{% comment %}
+=======================
+The purpose of this snippet is to list all your posts posted with a certain tag.
+=======================
+{% endcomment %}
+
+
+<div class="container-fluid" id="tagpagebanner" style="-webkit-box-shadow:inset 0px -20px 0px 0px #fff; -moz-box-shadow:inset 0px -20px 0px 0px #fff;  box-shadow:inset 0px -20px 0px 0px #fff;">
+	<div class="row justify-content-start">
+		<div class="col-md-7 offset-md-1">
+			<div class="row mt-0 mt-md-4">
+				<div class="col-md-9 px-5 py-4 mt-0 mt-md-5" style="background-color: white; border-left: 15px solid #B4C7BC">
+					<h1 class="lh1-5 size1-9 fw600"><i><span class="size1-4 fw500">This is</span></i><br>Tag Page</h1>
+					<p class="axiforma fw300 lh1-7 size1-1 pt-2 mb-0">The easiest way to find what you want, is through our tag page. Use the buttons to load the posts!</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h3 class="f2">Tag list:</h3>
+		</div>
+	</div>
+	<div class="row justify-content-center">
+		<div class="col-md-12">
+			{% for tag in tags %}
+				<button class="f1 pointer px-2 py-2 my-2 tag-button-tagpage {% if forloop.first %} active {% endif %}" onclick="makeTagVisible('{{ tag | slugify }}'); location.href='#{{ tag | slugify }}';">{{ tag }} <span style="opacity: 0.7">({{site.posts | where: "tags", tag | size}})</span></button>
+				{% if forloop.first %} 
+					{% assign firstTag = tag %}
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+	{% for tag in tags %}
+	<div class="row tagfilterList {% unless tag == firstTag %}d-none{% endunless %}" id="{{ tag | slugify }}">
+		<div class="col-md-12 text-center">
+			<h2 class="f2">{{ tag }}:</h2>
+		</div>
+		<div class="col-md-12">
+			<div class="row justify-content-center py-2">
+			{% for post in site.posts %}
+			{% if post.tags contains tag %}
+				{% include post-column-list.html post=post columns=4 %}
+			{% endif %}
+			{% endfor %}
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+
+<script>
+// Función para alternar los posts. La función para cambiar el active, está en custom.js (es una función en Jquery)
+function makeTagVisible(key){
+	console.log(key)
+	// Pongo d-none en todas
+	var tagfilterList = document.getElementsByClassName("tagfilterList");
+	for (var i = 0; i < tagfilterList.length; i++) {
+		tagfilterList[i].classList.add('d-none');
+	}
+	// Y lo quito en la que es en cuestión.
+	document.getElementById(key).classList.remove('d-none')
+}
+</script>

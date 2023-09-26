@@ -1,0 +1,117 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+title: Easy Succulents
+email: jimena@easysucculents.com
+name: Easy Succulents
+description: Easy Succulents is the ultimate Succulent Blog. I share everything I know about how to grow Succulents, how to propagate them, and more!
+url: https://www.easysucculents.com
+
+webmaster_verifications:
+  google: 1234
+  bing: 1234
+  alexa: 1234
+  yandex: 1234
+  baidu: 1234
+
+# Chupa la información de authors.yml tal y como aparece en el punto 5 de este link: https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/advanced-usage.md#author-information
+author: jimena
+
+#Defaults
+defaults:
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+      type: "posts" # previously `post` in Jekyll 2.2.
+    values:
+      layout: "blogpage"
+
+# Google analytics: https://desiredpersona.com/google-analytics-jekyll/
+google_analytics: UA-144910822-11
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  # jekyll-feed
+  # SEO jekyll: https://github.com/jekyll/jekyll-seo-tag
+  - jekyll-seo-tag
+  # Sitemap: https://github.com/jekyll/jekyll-sitemap
+  - jekyll-sitemap
+  # Tutorial para optimizar Jekyll: https://matthiasruhland.com/blog/speeding-up-jekyll
+  # Responsive Images: https://github.com/wildlyinaccurate/jekyll-responsive-image
+  # Tutorial: https://www.ratanparai.com/jekyll/Responsive-image-on-jekyll/
+  - jekyll-responsive-image
+
+# Para que incluya los headers y los redirects en la página, hay que añadir esta línea de código. Lo dice en estos artículos:
+# https://docs.netlify.com/routing/headers/#syntax-for-the-headers-file
+# https://docs.netlify.com/routing/redirects/#syntax-for-the-redirects-file
+include: 
+  - _headers
+  - _redirects
+
+# Para que se vea en LAN: https://stackoverflow.com/questions/16608466/connect-to-a-locally-built-jekyll-server-using-mobile-devices-in-the-lan
+host: 0.0.0.0
+
+permalink: /:title
+# Exclude from processing.
+# The following items will not be processed, by default. Create a custom list
+# to override the default setting.
+# exclude:
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules
+#   - vendor/bundle/
+#   - vendor/cache/
+#   - vendor/gems/
+#   - vendor/ruby/
+
+# OJO! Si se pone el save_to_source en false, deja de funcionar el output_path_format. Lo vi aquí: https://github.com/wildlyinaccurate/jekyll-responsive-image/issues/94
+# La solución es añadir a .gitignore esos archivos y punto.
+responsive_image:
+  template: _includes/responsive-image.html
+  output_path_format: assets/resized/%{dirname}/%{filename}-%{width}x%{height}.%{extension}
+  save_to_source: false
+  default_quality: 90
+  sizes:
+    - width: 100
+      quality: 80
+    - width: 320
+      quality: 80
+    - width: 480
+      quality: 80
+    - width: 800
+    - width: 1400
+
+# Tutorial del Compress: https://jch.penibelst.de/
+# No tiene plugin. Hay que añadir layout:compress en los otros layouts.
+compress_html:
+  clippings: []
+  comments: []
+  endings: []
+  ignore:
+    envs: []
+  blanklines: false
+  profile: false
+  startings: []
+
+plugins:
+  - jekyll-feed
+
+feed:
+  posts_limit: 200
+
+amazon:
+  tag: easysucculents-20

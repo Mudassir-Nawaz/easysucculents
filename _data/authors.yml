@@ -1,0 +1,15 @@
+#These are the main writers. Who writes depends on the shop parameter, as it's determined by the determine-author.html include.
+kelly-adams:
+ name: Kelly Adams
+ position: Easy Succulents Founder
+ description: My name is Kelly and I'm the the founder of Easy Succulents! I'm fascinated by this wonderful plants and I want to share with the world everything I know about them!
+ picture: kelly-adams.png
+ signature: jimena-signature.svg
+
+#This is how a Guest Author should look like. The website parameter is optional. If it exists, the position parameter will link to that website.
+guestauthor:
+  name: Guest Post Name
+  position: Gest Post Position (or website name if she/he has one)
+  description: This is a description
+  picture: inigo.png
+  website: https://www.mylittlegreencar.com

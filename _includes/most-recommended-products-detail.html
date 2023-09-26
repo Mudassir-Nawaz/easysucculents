@@ -1,0 +1,18 @@
+<div class="col text-center pt-5">
+	<img src="{{site.baseurl}}/assets/img/icons/{{include.seal}}" alt="{{include.title}} Badge" class="chosen-seal">
+	<div style="background-color: white;">
+		<!-- <a href="{{include.amazon-link}}/?tag={{site.amazon.tag}}" target="_blank" class="black">
+			<h3 class="allcaps size1-5 fw500 axiforma pt-4 pb-2">{{include.title}}</h3>
+		</a> -->
+		<a href="{{include.amazon-link}}/?tag={{site.amazon.tag}}" target="_blank"> 
+		{% responsive_image_block %}
+			path: assets/img/pages/home/{{include.image}}
+			alt: {{include.title}} Thumbnail
+		{% endresponsive_image_block %}
+		</a>
+		<a href="{{include.amazon-link}}/?tag={{site.amazon.tag}}" target="_blank" class="black">
+			<h3 class="fw600 pt-0 size1-3 px-2 mb-4">{{include.product}}</h3>
+		</a>
+		<a class="btn btn-resources fw600 mb-3 mt-2" href="{{include.amazon-link}}/?tag={{site.amazon.tag}}" target="_blank">Check Price</a>
+	</div>
+</div>

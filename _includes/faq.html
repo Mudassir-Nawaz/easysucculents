@@ -1,0 +1,12 @@
+<div class="container mb-4 pr-0 pr-md-auto">
+  <div class="row mr-md-5 mr-0 p-md-2 px-2" style="background-color: rgba(242,242,242,1);" id="faq">
+    <div class="col-md-12">
+        <h4 class="allcaps fw700 blue pb-1 size1-3 mb-0 pt-3">{% if include.title %}{{include.title}}{% else %}Most Common Questions{% endif %}</h4>
+        <hr>
+        {% for faq in page.faq %}
+          <p class="allcaps fw700 pb-0 mb-0 pt-3" id="faq-question-{{forloop.index}}">{{faq.question}}</p>
+          <p class="f1">{{faq.answer}}</p>
+        {% endfor %}
+    </div>
+  </div>
+</div>

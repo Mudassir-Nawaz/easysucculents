@@ -1,0 +1,23 @@
+{% if include.columns == 1%}
+	{% assign chosenCol = "col-10 col-md-12" %}
+{% elsif include.columns == 2 %}
+	{% assign chosenCol = "col-10 col-md-6" %}
+{% elsif include.columns == 4 %}
+	{% assign chosenCol = "col-10 col-md-3" %}
+{% else %}
+	{% assign chosenCol = "col-10 col-md-4" %}
+{% endif %}
+
+<div class="{{chosenCol}} mb-5 postCol" id="{{include.post.title}}" data-tags="{{include.post.tags}}" data-categories="{{include.post.categories}}">
+	<a href="{{site.baseurl}}/{{include.post.slug}}">
+		{% responsive_image_block %}
+			template: _includes/responsive-image-grey-shadow.html
+			path: assets/img/posts/{{include.post.slug}}.jpg
+			alt: {{include.post.title}} Thumbnail
+		{% endresponsive_image_block %}
+	</a>
+	<h3 class="lh1-3 pt-3">
+		<a href="{{site.baseurl}}/{{include.post.slug}}" class="heading">{{include.post.title}}</a>
+	</h3>
+	<p class="fw300 lh1-7 size1-1 pt-2 mb-0">{{include.post.date | date: '%B %d, %Y' }}</p>
+</div>	

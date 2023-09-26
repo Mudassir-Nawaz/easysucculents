@@ -1,0 +1,248 @@
+---
+
+---
+<!DOCTYPE html>
+<html lang="en-US">
+
+	{% include head.html %}
+	<style>
+		
+
+    p{
+        font-weight: 500;
+	    line-height: 1.75;
+	    letter-spacing: -0.004em;
+	    font-size: 1.25rem;
+	    margin-bottom: 2rem;
+	    text-align: left;
+	    font-family: SourceSerifPro;
+	    color: rgba(0, 0, 0, 0.84);
+    }
+    li{
+        font-weight: 500;
+        line-height: 2;
+        letter-spacing: -0.004em;
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+        text-align: left;
+        font-family: SourceSerifPro;
+        color: rgba(0, 0, 0, 0.84);
+    }
+    ul {
+    	margin-bottom: 2rem;
+    }
+    ol {
+    	margin-bottom: 2rem;
+    }
+    th{
+        font-weight: 600;
+        line-height: 2;
+        letter-spacing: -0.004em;
+        font-size: 1.25rem;
+        text-align: left;
+        font-family: SourceSerifPro;
+        color: rgba(0, 0, 0, 0.84);
+        color: white;
+        padding-left: 0.75rem;
+        padding-right: 0.5rem;
+    }
+    tr{
+        font-weight: 500;
+        line-height: 2;
+        letter-spacing: -0.004em;
+        font-size: 1.25rem;
+        text-align: left;
+        font-family: SourceSerifPro;
+        color: rgba(0, 0, 0, 0.84);
+        border: 1px solid black;
+    }
+    td {
+    	padding-left: 0.75rem;
+    	padding-right: 0.5rem;
+    }
+    table {
+    	width: 100%;
+    	border-collapse: collapse;
+    	border: 1px solid black;
+    }
+    thead {
+    	background-color: #899C41;
+    }
+    h3{
+        font-weight: 600;
+        line-height: 2;
+        text-align: left;
+        text-transform: uppercase;
+        font-size: 1.4rem;
+        margin-bottom: 2rem;
+        margin-top: 3rem;
+        font-family: Axiforma;
+    }
+    h2{
+        font-weight: 700;
+        line-height: 2;
+        text-align: left;
+        text-transform: uppercase;
+        text-decoration: underline;
+        font-size: 1.6rem;
+        margin-bottom: 2rem;
+        margin-top: 3rem;
+        font-family: Axiforma;
+    }
+
+	</style>
+	
+	<!-- Este script lo que determina es el autor. De ahí que se pueda usar la etiqueta author. Que a su vez, saca la información de authors.yml en _data -->
+	{% include determine-author.html %}
+	
+	<body>
+		<div id="overlaydiv"></div>
+		{% include nav.html %}
+
+			<!-- Ezoic - top_of_page - top_of_page -->
+			<div id="ezoic-pub-ad-placeholder-105"> </div>
+			<!-- End Ezoic - top_of_page - top_of_page -->
+
+			<div class="container-fluid">
+				<div class="row no-gutters justify-content-center mt-0 mt-md-5 pt-1">
+					<div class="col-12 col-md-8 text-center mb-4">
+						<h1 class="fw600 mt-1 mb-5 lh1-5 size2-7 pt-4 pt-md-0">{{page.titlehtml}}</h1>
+
+						<!-- Ezoic - under_page_title - under_page_title -->
+						<!-- <div id="ezoic-pub-ad-placeholder-106"> </div> -->
+						<!-- End Ezoic - under_page_title - under_page_title -->
+						
+						<span class="size1-4 lh1-8 pb-2 mt-3">{{page.description}}</span>
+					</div>
+				</div>
+			</div>
+			<div class="container-fluid mt-0 pb-4">
+				<div class="d-block d-md-none">
+					<hr style="margin-top: 0.5rem;">
+					<div class="row align-items-center">
+						<div class="col-md-2 col-3">
+							<img class="img-fluid px-md-2" src="{{site.baseurl}}/assets/img/authors/{{authorcode}}.png" alt="{{author.name}} Profile Picture">
+						</div>
+						<div class="col-md-7 col-6">
+							<p class="my-0 size1-2 pt-2 pt-md-0"><span class="fw600">{{author.name}}</span></p>
+							<p class="mt-1">{{page.date | date: '%B %d, %Y'}}</p>
+						</div>
+						<div class="col-3 col-md-3 text-right">
+							<a href="https://www.pinterest.com/pin/create/button/" data-pin-do="buttonBookmark" data-pin-custom="true">
+								<img style="white-space: nowrap;" class="img-fluid px-md-4 d-none d-md-block" src="{{site.baseurl}}/assets/img/icons/share-on-pinterest.svg" alt="Share {{page.title}} on Pinterest" >
+								<img style="white-space: nowrap;" class="img-fluid px-0 d-block d-md-none" src="{{site.baseurl}}/assets/img/icons/share-on-pinterest_small.svg" alt="Share {{page.title}} on Pinterest">
+							</a>									
+						</div>
+					</div>
+					<hr style="margin-bottom: 0.5rem;">
+				</div>
+				<div class="row justify-content-center">
+					<div class="col-12 col-md-8 px-md-5 mt-4">
+						{% if page.featuredimage != false %}
+							<div class="d-block d-md-none">
+								{% responsive_image_block %}
+									template: _includes/responsive-image-grey-shadow.html
+									path: assets/img/posts/{{page.slug}}.jpg
+									alt: {{page.title}} Thumbnail
+								{% endresponsive_image_block %}
+							</div>
+							<div class="d-none d-md-block">
+								{% responsive_image_block %}
+									template: _includes/responsive-image-grey-shadow.html
+									path: assets/img/posts/{{page.slug}}_thumbnail.jpg
+									alt: {{page.title}} Thumbnail
+								{% endresponsive_image_block %}
+								<a href="https://www.pinterest.com/pin/create/button/" data-pin-do="buttonBookmark" data-pin-custom="true" class="blogpage-pinterest-share">
+									<img style="white-space: nowrap;" class="img-fluid px-md-4 d-none d-md-block" src="{{site.baseurl}}/assets/img/icons/share-on-pinterest.svg" alt="Share {{page.title}} on Pinterest" >
+								</a>
+							</div>
+						{% endif %}
+
+						<!-- For ads placements -->
+						<!-- https://nts.strzibny.name/insert-content-in-the-middle-of-jekyll-post/ -->
+						{% if page.content contains '<p>' %}
+						  {% assign content_array = page.content | split: '<p>' %}
+						{% elsif page.content contains 'highlighter-rouge' %}
+						  <!-- no split -->
+						  {% assign content_array = page.content %}
+						{% else %}
+						  {% assign content_array = page.content | split: site.excerpt_separator %}
+						{% endif %}
+
+						<!-- for loop -->
+						{% for block in content_array %}
+						  {{ block | prepend:'<p>'}}
+
+						  {% if forloop.index0 == 1 %}
+						    <!-- Ezoic - under_first_paragraph - under_first_paragraph -->
+							<div id="ezoic-pub-ad-placeholder-108"> </div>
+							<!-- End Ezoic - under_first_paragraph - under_first_paragraph -->
+						  {% endif %}
+						  {% if forloop.index0 == 2 %}
+						    <!-- Ezoic - under_second_paragraph - under_second_paragraph -->
+							<div id="ezoic-pub-ad-placeholder-109"> </div>
+							<!-- End Ezoic - under_second_paragraph - under_second_paragraph -->
+						  {% endif %}
+						  {% if forloop.index0 == 6 %}
+						    <!-- Ezoic - mid_content - mid_content -->
+							<div id="ezoic-pub-ad-placeholder-110"> </div>
+							<!-- End Ezoic - mid_content - mid_content -->
+						  {% endif %}
+						  {% if forloop.index0 == 10 %}
+						    <!-- Ezoic - long_content - long_content -->
+							<div id="ezoic-pub-ad-placeholder-111"> </div>
+							<!-- End Ezoic - long_content - long_content -->
+						  {% endif %}
+						  {% if forloop.index0 == 15 %}
+						    <!-- Ezoic - longest_content - longest_content -->
+							<div id="ezoic-pub-ad-placeholder-112"> </div>
+							<!-- End Ezoic - longest_content - longest_content -->
+						  {% endif %}
+						  {% if forloop.index0 == 18 %}
+						    <!-- Ezoic - incontent_5 - incontent_5 -->
+							<div id="ezoic-pub-ad-placeholder-114"> </div>
+							<!-- End Ezoic - incontent_5 - incontent_5 -->
+						  {% endif %}
+						  {% if forloop.index0 == 21 %}
+						    <!-- Ezoic - incontent_6 - incontent_6 -->
+							<div id="ezoic-pub-ad-placeholder-115"> </div>
+							<!-- End Ezoic - incontent_6 - incontent_6 -->
+						  {% endif %}
+						  {% if forloop.index0 == 24 %}
+						    <!-- Ezoic - incontent_7 - incontent_7 -->
+							<div id="ezoic-pub-ad-placeholder-116"> </div>
+							<!-- End Ezoic - incontent_7 - incontent_7 -->
+						  {% endif %}
+
+						  {% if forloop.last %}
+						    <!-- Ezoic - bottom_of_page_content - bottom_of_page -->
+							<div id="ezoic-pub-ad-placeholder-113"> </div>
+							<!-- End Ezoic - bottom_of_page_content - bottom_of_page -->
+						  {% endif %}
+						{% endfor %}
+						
+						{% include post-signature.html author=author.name position=author.position description=author.description picture=author.picture %}
+
+						<div class="pt-4">{{page.ps}}</div>
+						
+						<p class="f2 mb-2 d-none d-md-block" style="color:#272525; font-weight: 500">Posted in:
+							{% for tag in page.tags %}
+							<a href="/tags">
+								<button class="tag-button">
+									{{ tag }}
+								</button>
+							</a>
+							{% endfor %}
+						</p>
+					</div>
+					<div class="col-md-3 text-center mt-4 d-none d-md-block px-md-4">
+						{% include sidebar.html %}
+					</div>
+				</div>
+			</div>
+		{% include relatedposts.html %}
+		{% include footer.html %}
+	</body>
+
+	{% include scripts.html %}
+</html>

@@ -1,0 +1,39 @@
+---
+layout: blank
+permalink: /welcome
+title: Welcome to our email list!
+description: You've been successfully subscribed! It's great to have you on board!
+image: /assets/img/pages/welcome.jpg
+---
+
+<div class="container-fluid" style="background-color: #899C41">
+	<div class="row justify-content-center pt-5">
+		<div class="col-md-3 text-center">
+			{% include determine-author.html %}
+			<img src="{{site.baseurl}}/assets/img/authors/{{author.picture}}" alt="{{author.name}} Picture" class="img-fluid px-5 mb-3">
+		</div>
+	</div>
+	<div class="row justify-content-center pb-5">
+		<div class="col-md-8 text-center">
+			<img src="{{site.baseurl}}/assets/img/icons/welcome.svg" alt="welcome" style="width: 270px;" class="pb-5 pt-4">
+			<p class="source white size1-3 pb-5 mb-0" style="opacity: 0.8">I'm so glad you're part of the Easy Succulents Family. <br> You're welcome to look around and if you're completely knew, try reading my <a href="{{site.baseurl}}/recommended-products" style="color:white; border-bottom: 2px solid orange;">Books & Products</a> page for the stuff you'll need!</p>
+		</div>
+	</div>
+</div>
+
+<div class="container pt-5">
+	<div class="row justify-content-center">
+		{% assign latest = site.posts  | sort: 'date' | reverse%}
+		{% for post in latest limit:8 offset:0 %}
+			{% include post-column-list.html post=post columns=4 %}
+		{% endfor %}
+	</div>
+</div>
+
+<div class="container pb-5">
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<a href="{{site.baseurl}}/blog"><button class="btn btn-resources mt-3 size1-5 px-5">Load More</button></a>
+		</div>
+	</div>
+</div>

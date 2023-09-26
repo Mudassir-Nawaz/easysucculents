@@ -1,0 +1,8 @@
+<!-- Este script determina el autor del blog -->
+{% if page.author %}
+	{% assign author = site.data.authors[page.author] %}
+	{% assign authorcode = page.author %}
+{% else %}
+	{% assign author = site.data.authors["kelly-adams"] %}
+	{% assign authorcode = "kelly-adams" %}
+{% endif %}

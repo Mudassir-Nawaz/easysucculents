@@ -1,0 +1,45 @@
+<!-- los parámetros que se pasan se llaman siguiendo esta nomenclatura include.loquesea -->
+<!-- onepost es el post en el que el parámetro que se pasa (include.post) coincide con el slug -->
+{% assign onepost = site.posts | where:'slug', include.post %}
+<!-- onepage es la página en la que la url coincide con la url que se ha pasado (añadiéndole previamente el /) -->
+{% assign completeurl = "/" | append: include.post %}
+{% assign onepage = site.pages | where:'url', completeurl %}
+
+<!-- Si existe onepost, ese es el featured. Sino, onepage. Y sino, pues se pone vacío para que no se ponga nada. -->
+{% if onepost.size > 0 %}
+	{% assign featuredSnippet = onepost %}
+	{% assign type = "posts" %}
+{% elsif onepage.size > 0 %}
+	{% assign featuredSnippet = onepage %}
+	{% assign type = "pages" %}
+{% else %}
+	{% assign featuredSnippet = [] %}
+{% endif %}
+
+<!-- Solo se pone si existe el post -->
+{% if featuredSnippet.size > 0 %}
+<div class="row justify-content-center pb-3 pb-md-5">
+	<div class="col-md-5">
+		<a href="{{site.baseurl}}/{{include.post}}">
+			{% responsive_image_block %}
+				template: _includes/responsive-image-grey-shadow.html
+				path: assets/img/{{type}}/{{include.post}}_thumbnail.jpg
+				alt: {{include.post.title}} Thumbnail
+			{% endresponsive_image_block %}
+		</a>
+	</div>
+	<div class="col-md-7 px-md-5 text-left" style="border-top: lightgrey 1px solid;">
+		<!-- Un for loop, pero en el que solo hay 1 (naturalmente, porque solo en uno coincide que el slug sea el include.post y porque hay un límite de 1) -->
+		{% for post in featuredSnippet limit:1 %}
+		<h3 class="lh1-3 py-3">
+			<a href="{{site.baseurl}}{{post.url}}" class="heading">
+				{{post.title}}
+			</a>
+		</h3>
+		<p class="lh1-7 size1-1 pt-1 fw500 mb-0 d-none d-md-block">
+			{{post.description }}
+		</p>
+		{% endfor %}
+	</div>
+</div>
+{% endif %}

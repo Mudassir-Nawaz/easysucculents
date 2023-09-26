@@ -1,0 +1,87 @@
+---
+layout: page
+permalink: /contact
+title: Contact
+description: If you want to contact Easy Succulents to ask a question, be featured as a guest, or any other inquiry, just send us a message and we'll get back to you asap.
+image: /assets/img/pages/contact.jpg
+---
+<div class="container-fluid" id="contactbanner" style="-webkit-box-shadow:inset 0px -20px 0px 0px #fff; -moz-box-shadow:inset 0px -20px 0px 0px #fff;  box-shadow:inset 0px -20px 0px 0px #fff;">
+	<div class="row justify-content-start">
+		<div class="col-md-7 offset-md-1">
+			<div class="row mt-0 mt-md-5">
+				<div class="col-md-9 px-5 py-4 mt-0 mt-md-5" style="background-color: white; border-left: 15px solid #B4C7BC">
+					<h1 class="lh1-5 size1-9 fw600"><i><span class="size1-4 fw500">Feel Free to</span></i><br>Contact Us</h1>
+					<p class="axiforma fw300 lh1-7 size1-1 pt-2 mb-0">{{page.description}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container pt-5">
+	<div class="row justify-content-center">
+		<div class="col-lg-8 col-lg-offset-2">
+        	<form name="ContactPage" class="needs-validation" action="/thank-you" novalidate netlify>
+			<div class="form-row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="form_name">First Name *</label>
+						<input id="form_name" type="text" name="name" class="form-control" placeholder="Please enter your firstname *" required>
+						<div class="invalid-feedback">Please fill out this field.</div>
+						<div class="valid-feedback">Looks good!</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="form_lastname">Last Name *</label>
+						<input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Please enter your lastname *" required>
+						<div class="invalid-feedback">Please fill out this field.</div>
+						<div class="valid-feedback">Looks good!</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="form_email">Email *</label>
+						<input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email *" required>
+						<div class="invalid-feedback">Please fill out this field.</div>
+						<div class="valid-feedback">Looks good!</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="form_email">Why are you contacting us? *</label>
+						<select class="form-control" required="" name="reason">
+							<option value="I have a question">I want to ask a Succulent Question</option>
+							<option value="I want to Guest Post">I would love to be a guest on your blog</option>
+							<option value="other">Any other thing</option>
+						</select>
+						<div class="invalid-feedback">Please fill out this field.</div>
+						<div class="valid-feedback">Looks good!</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="form_message">Message *</label>
+						<textarea id="form_message" name="message" class="form-control" placeholder="Message for me *" rows="4" required></textarea>
+						<div class="invalid-feedback">Please fill out this field.</div>
+						<div class="valid-feedback">Looks good!</div>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<button class="btn btn-resources py-2" type="submit" style="width: 100%;"><span class="fw600 size1-2">Submit form</span></button>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="col-md-12">
+					<p class="text-muted pt-3"><strong>*</strong> These fields are required.</p>
+				</div>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>

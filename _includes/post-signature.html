@@ -1,0 +1,33 @@
+<!-- los parámetros que se pasan se llaman siguiendo esta nomenclatura include.loquesea -->
+<div class="row justify-content-md-start">
+	<div class="col-5 col-md-2 text-left">
+		{% if page.author %}
+		<img src="{{site.baseurl}}/assets/img/authors/{{page.authorimage}}" alt="{{include.author}} Picture" class="img-fluid">
+		{% else %}
+		<img src="{{site.baseurl}}/assets/img/authors/{{include.picture}}" alt="{{include.author}} Picture" class="img-fluid">
+		{% endif %}
+	</div>
+</div>
+<div class="row justify-content-md-start">
+	<div class="col-12 col-md-12 text-left">
+		<h3 class="size1-3 mt-4 fw600">By 
+			{% if page.author %}
+				{{page.author}}
+			{% else %}
+				{{include.author}}
+			{% endif %}
+		</h3>
+		{% if page.authorCompany %}
+			<h4 class="size1-2 mt-2 fw500">
+				<a href="{{page.authorWebsite}}" target='_blank'>{{page.authorCompany}}</a>
+			</h4>
+		{% else %} 	
+			<h4 class="size1-2 mt-3 fw500">
+				{{include.position}}
+			</h4>
+			<p class="size1-1 mt-3 fw400">
+				{{include.description}}
+			</p>
+		{% endif %}
+	</div>
+</div>

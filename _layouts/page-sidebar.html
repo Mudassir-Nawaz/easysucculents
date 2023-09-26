@@ -1,0 +1,69 @@
+---
+
+---
+<!DOCTYPE html>
+<html lang="en-US">
+
+	{% include head.html %}
+	
+	<!-- Este script lo que determina es el autor. De ahí que se pueda usar la etiqueta author. Que a su vez, saca la información de authors.yml en _data -->
+	{% include determine-author.html %}
+	
+	<body>
+		<div id="overlaydiv"></div>
+		{% include nav.html %}
+			<div class="container-fluid">
+				<div class="row no-gutters justify-content-center mt-0 mt-md-5 pt-1">
+					<div class="col-12 col-md-8 text-center">
+						<h1 class="fw600 mt-1 mb-5 lh1-5 size2-7 pt-4 pt-md-0">{{page.titlehtml}}</h1>
+						<h3 class="size1-4 lh1-8 pb-2 mt-3">{{page.description}}</h3>
+					</div>
+				</div>
+			</div>
+			<div class="container-fluid mt-0 pb-4">
+				<div class="row justify-content-center">
+					<div class="col-12 col-md-8 px-md-5 mt-4">
+						{% if page.featuredimage != false %}
+							<div class="d-block d-md-none">
+								{% responsive_image_block %}
+									template: _includes/responsive-image-grey-shadow.html
+									path: assets/img/posts/{{page.slug}}.jpg
+									alt: {{page.title}} Thumbnail
+								{% endresponsive_image_block %}
+							</div>
+							<div class="d-none d-md-block">
+								{% responsive_image_block %}
+									template: _includes/responsive-image-grey-shadow.html
+									path: assets/img/posts/{{page.slug}}_thumbnail.jpg
+									alt: {{page.title}} Thumbnail
+								{% endresponsive_image_block %}
+							</div>
+						{% endif %}
+
+						{{content}}
+						
+						{% include post-signature.html author=author.name position=author.position description=author.description picture=author.picture %}
+
+						<div class="pt-4">{{page.ps}}</div>
+						
+						<p class="f2 mb-2 d-none d-md-block" style="color:#272525; font-weight: 500">Posted in:
+							{% for tag in page.tags %}
+							<a href="/tags">
+								<button class="tag-button">
+									{{ tag }}
+								</button>
+							</a>
+							{% endfor %}
+						</p>
+					</div>
+					<div class="col-md-2 text-center mt-4 d-none d-md-block">
+						{% include sidebar.html %}
+					</div>
+				</div>
+			</div>
+		{% include relatedposts.html %}
+		{% include footer.html %}
+	</body>
+
+	{% include scripts.html %}
+</html>

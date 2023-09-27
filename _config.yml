@@ -82,7 +82,7 @@ permalink: /:title
 # La solución es añadir a .gitignore esos archivos y punto.
 responsive_image:
   template: _includes/responsive-image.html
-  output_path_format: assets/resized/%{dirname}/%{filename}-%{width}x%{height}.%{extension}
+  output_path_format: assets/%{dirname}/%{filename}.%{extension}
   save_to_source: false
   default_quality: 90
   sizes:

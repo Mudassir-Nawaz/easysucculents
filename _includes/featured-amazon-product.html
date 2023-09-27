@@ -19,6 +19,11 @@
 <div class="row justify-content-center pb-3 pb-md-5 mt-5 mt-md-0">
 	<div class="col-md-4 px-md-0 px-5">
 		<a href="{{include.link}}?tag={{site.amazon.tag}}" target="_blank">
+			{% responsive_image_block %}
+				template: _includes/responsive-image.html
+				path: assets/img/{{type}}/{{page.url}}/{{include.image}}
+				alt: {{include.title}}
+			{% endresponsive_image_block %}
 		</a>
 	</div>
 	<div class="col-md-8 px-md-5 text-center text-md-left" style="border-top: lightgrey 1px solid;">
